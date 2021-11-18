@@ -27,7 +27,7 @@ public class ButtonBehaviour : MonoBehaviour
 
     public void PlaceX()
     {
-        textX.gameObject.SetActive(true);
+        textX.gameObject.SetActive(true); 
         isOccupied = true;
     }
 
