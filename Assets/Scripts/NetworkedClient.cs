@@ -205,6 +205,10 @@ public class NetworkedClient : MonoBehaviour
                 Debug.Log(csv[1].ToString());
                 isGameOver = true;
                 break;
+            case ServerToClientSignifiers.WipeBoard:
+                Debug.Log(csv[1].ToString());
+                WipeBoard();
+                break;
 
         }
 
@@ -215,7 +219,22 @@ public class NetworkedClient : MonoBehaviour
         return isConnected;
     }
 
+    private void WipeBoard()
+    {
+        // Wipe Buttons
+        buttonA.WipePlacement();
+        buttonB.WipePlacement();
+        buttonC.WipePlacement();
+        buttonD.WipePlacement();
+        buttonE.WipePlacement();
+        buttonF.WipePlacement();
+        buttonG.WipePlacement();
+        buttonH.WipePlacement();
+        buttonI.WipePlacement();
 
+        // Wipe Variables
+        isGameOver = false;
+    }
 }
 
 static public class ClientToServerSignifiers
@@ -233,4 +252,5 @@ static public class ServerToClientSignifiers
     public const int YouWon = 5;
     public const int YouLost = 6;
     public const int Tie = 7;
+    public const int WipeBoard = 8;
 }
