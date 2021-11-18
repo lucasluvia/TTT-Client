@@ -16,6 +16,8 @@ public class NetworkedClient : MonoBehaviour
     [SerializeField] ButtonBehaviour buttonH;
     [SerializeField] ButtonBehaviour buttonI;
 
+    bool isMyTurn;
+
     int connectionID;
     int maxConnections = 1000;
     int reliableChannelID;
@@ -40,7 +42,12 @@ public class NetworkedClient : MonoBehaviour
 
     public void SquareClicked(char SquareID)
     {
-        SendMessageToHost(ClientToServerSignifiers.ClickedSquare + "," + SquareID);
+        if(isMyTurn)
+        {
+            SendMessageToHost(ClientToServerSignifiers.ClickedSquare + "," + SquareID);
+            isMyTurn = false;
+        }
+
     }
 
     private void UpdateNetworkConnection()
@@ -173,6 +180,10 @@ public class NetworkedClient : MonoBehaviour
             case ServerToClientSignifiers.ValueNotPlaced:
                 Debug.Log("ValueNotPlaced");
                 break;
+            case ServerToClientSignifiers.ItsYourTurn:
+                Debug.Log("ItsYourTurn");
+                isMyTurn = true;
+                break;
 
         }
 
@@ -184,4 +195,17 @@ public class NetworkedClient : MonoBehaviour
     }
 
 
+}
+
+static public class ClientToServerSignifiers
+{
+    public const int ClickedSquare = 1;
+}
+
+static public class ServerToClientSignifiers
+{
+    public const int XValuePlaced = 1;
+    public const int OValuePlaced = 2;
+    public const int ValueNotPlaced = 3;
+    public const int ItsYourTurn = 4;
 }
