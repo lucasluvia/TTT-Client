@@ -17,6 +17,7 @@ public class NetworkedClient : MonoBehaviour
     [SerializeField] ButtonBehaviour buttonI;
 
     bool isMyTurn;
+    bool isGameOver = false;
 
     int connectionID;
     int maxConnections = 1000;
@@ -37,12 +38,20 @@ public class NetworkedClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(Input.GetKeyDown(KeyCode.R) && isGameOver)
+        {
+            SendMessageToHost(ClientToServerSignifiers.Replay + "");
+        }
+
         UpdateNetworkConnection();
+        
+
     }
 
     public void SquareClicked(char SquareID)
     {
-        if(isMyTurn)
+        if(isMyTurn && !isGameOver)
         {
             SendMessageToHost(ClientToServerSignifiers.ClickedSquare + "," + SquareID);
             isMyTurn = false;
@@ -184,6 +193,18 @@ public class NetworkedClient : MonoBehaviour
                 Debug.Log("ItsYourTurn");
                 isMyTurn = true;
                 break;
+            case ServerToClientSignifiers.YouWon:
+                Debug.Log("You Won! Press R to Replay");
+                isGameOver = true;
+                break;
+            case ServerToClientSignifiers.YouLost:
+                Debug.Log(csv[1].ToString());
+                isGameOver = true;
+                break;
+            case ServerToClientSignifiers.Tie:
+                Debug.Log(csv[1].ToString());
+                isGameOver = true;
+                break;
 
         }
 
@@ -200,6 +221,7 @@ public class NetworkedClient : MonoBehaviour
 static public class ClientToServerSignifiers
 {
     public const int ClickedSquare = 1;
+    public const int Replay = 2;
 }
 
 static public class ServerToClientSignifiers
@@ -208,4 +230,7 @@ static public class ServerToClientSignifiers
     public const int OValuePlaced = 2;
     public const int ValueNotPlaced = 3;
     public const int ItsYourTurn = 4;
+    public const int YouWon = 5;
+    public const int YouLost = 6;
+    public const int Tie = 7;
 }
