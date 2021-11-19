@@ -18,6 +18,7 @@ public class NetworkedClient : MonoBehaviour
 
     bool isMyTurn;
     bool isGameOver = false;
+    bool canRestart = false;
 
     int connectionID;
     int maxConnections = 1000;
@@ -39,9 +40,9 @@ public class NetworkedClient : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetKeyDown(KeyCode.R) && isGameOver)
+        if(Input.GetKeyDown(KeyCode.R) && canRestart)
         {
-            SendMessageToHost(ClientToServerSignifiers.Replay + "");
+            SendMessageToHost(ClientToServerSignifiers.Restart + "");
         }
 
         UpdateNetworkConnection();
@@ -186,15 +187,12 @@ public class NetworkedClient : MonoBehaviour
                     buttonI.PlaceO();
                 location = 'J';
                 break;
-            case ServerToClientSignifiers.ValueNotPlaced:
-                Debug.Log("ValueNotPlaced");
-                break;
             case ServerToClientSignifiers.ItsYourTurn:
                 Debug.Log("ItsYourTurn");
                 isMyTurn = true;
                 break;
             case ServerToClientSignifiers.YouWon:
-                Debug.Log("You Won! Press R to Replay");
+                Debug.Log("You Won! Press R to Restart");
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.YouLost:
@@ -209,6 +207,12 @@ public class NetworkedClient : MonoBehaviour
                 Debug.Log(csv[1].ToString());
                 WipeBoard();
                 break;
+            case ServerToClientSignifiers.WatchReplay:
+                WipeButtons();
+                break;
+            case ServerToClientSignifiers.WantToRestart:
+                canRestart = true;
+                break;
 
         }
 
@@ -221,7 +225,12 @@ public class NetworkedClient : MonoBehaviour
 
     private void WipeBoard()
     {
-        // Wipe Buttons
+        WipeButtons();
+        isGameOver = false;
+        canRestart = false;
+    }
+    private void WipeButtons()
+    {
         buttonA.WipePlacement();
         buttonB.WipePlacement();
         buttonC.WipePlacement();
@@ -231,26 +240,28 @@ public class NetworkedClient : MonoBehaviour
         buttonG.WipePlacement();
         buttonH.WipePlacement();
         buttonI.WipePlacement();
-
-        // Wipe Variables
-        isGameOver = false;
     }
+
+
 }
 
 static public class ClientToServerSignifiers
 {
     public const int ClickedSquare = 1;
     public const int Replay = 2;
+    public const int Restart = 3;
+
 }
 
 static public class ServerToClientSignifiers
 {
     public const int XValuePlaced = 1;
     public const int OValuePlaced = 2;
-    public const int ValueNotPlaced = 3;
-    public const int ItsYourTurn = 4;
-    public const int YouWon = 5;
-    public const int YouLost = 6;
-    public const int Tie = 7;
-    public const int WipeBoard = 8;
+    public const int ItsYourTurn = 3;
+    public const int YouWon = 4;
+    public const int YouLost = 5;
+    public const int Tie = 6;
+    public const int WipeBoard = 7;
+    public const int WatchReplay = 8;
+    public const int WantToRestart = 9;
 }
