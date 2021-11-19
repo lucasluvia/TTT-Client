@@ -47,6 +47,7 @@ public class NetworkedClient : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) && canRestart)
         {
             SendMessageToHost(ClientToServerSignifiers.Restart + "");
+            MessageText.text = "Waiting for other player...";
         }
 
         UpdateNetworkConnection();
