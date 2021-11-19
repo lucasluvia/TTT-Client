@@ -15,13 +15,25 @@ public class ButtonBehaviour : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textO;
 
+    [SerializeField]
+    private bool isMessageButton = false;
+    [SerializeField]
+    private int messageID = 0;
+
     private bool isOccupied = false;
 
     public void OnClicked()
     {
-        if (!isOccupied)
+        if (!isMessageButton)
         {
-            client.SquareClicked(buttonID);
+            if (!isOccupied)
+            {
+                client.SquareClicked(buttonID);
+            }
+        }
+        else
+        {
+            client.SendMessage(messageID);
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
 public class NetworkedClient : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class NetworkedClient : MonoBehaviour
     [SerializeField] ButtonBehaviour buttonG;
     [SerializeField] ButtonBehaviour buttonH;
     [SerializeField] ButtonBehaviour buttonI;
+
+    [SerializeField] TextMeshProUGUI MessageText;
+    [SerializeField] TextMeshProUGUI TextText;
 
     bool isMyTurn;
     bool isGameOver = false;
@@ -56,6 +60,7 @@ public class NetworkedClient : MonoBehaviour
         {
             SendMessageToHost(ClientToServerSignifiers.ClickedSquare + "," + SquareID);
             isMyTurn = false;
+            MessageText.text = "Waiting for other player...";
         }
 
     }
@@ -76,6 +81,7 @@ public class NetworkedClient : MonoBehaviour
             {
                 case NetworkEventType.ConnectEvent:
                     Debug.Log("connected.  " + recConnectionID);
+                    MessageText.text = "Waiting for other player...";
                     ourClientID = recConnectionID;
                     break;
                 case NetworkEventType.DataEvent:
@@ -86,6 +92,7 @@ public class NetworkedClient : MonoBehaviour
                 case NetworkEventType.DisconnectEvent:
                     isConnected = false;
                     Debug.Log("disconnected.  " + recConnectionID);
+                    MessageText.text = "Disconnected from room";
                     break;
             }
         }
@@ -189,33 +196,57 @@ public class NetworkedClient : MonoBehaviour
                 break;
             case ServerToClientSignifiers.ItsYourTurn:
                 Debug.Log("ItsYourTurn");
+                MessageText.text = "It's your turn!";
                 isMyTurn = true;
                 break;
             case ServerToClientSignifiers.YouWon:
                 Debug.Log("You Won! Press R to Restart");
+                MessageText.text = "You Won! Watching replay...";
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.YouLost:
+                MessageText.text = "You Lost! Watching replay...";
                 Debug.Log(csv[1].ToString());
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.Tie:
+                MessageText.text = "Game Tied. Watching replay...";
                 Debug.Log(csv[1].ToString());
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.WipeBoard:
-                Debug.Log(csv[1].ToString());
+                MessageText.text = "Waiting for other player...";
                 WipeBoard();
                 break;
             case ServerToClientSignifiers.WatchReplay:
                 WipeButtons();
                 break;
             case ServerToClientSignifiers.WantToRestart:
+                MessageText.text = "Press R if you want to restart.";
+                canRestart = true;
+                break;
+            case ServerToClientSignifiers.ReceiveText:
+                TextText.text = csv[1].ToString();
                 canRestart = true;
                 break;
 
         }
 
+    }
+
+    public void SendMessage(int messageID)
+    {
+        string message = "";
+        if (messageID == 1)
+            message = "Sorry!";
+        if (messageID == 2)
+            message = "One More!";
+        if (messageID == 3)
+            message = "Good One!";
+        if (messageID == 4)
+            message = "Nice Try!";
+
+        SendMessageToHost(ClientToServerSignifiers.SendText + "," + message);
     }
 
     public bool IsConnected()
@@ -250,6 +281,7 @@ static public class ClientToServerSignifiers
     public const int ClickedSquare = 1;
     public const int Replay = 2;
     public const int Restart = 3;
+    public const int SendText = 4;
 
 }
 
@@ -264,4 +296,5 @@ static public class ServerToClientSignifiers
     public const int WipeBoard = 7;
     public const int WatchReplay = 8;
     public const int WantToRestart = 9;
+    public const int ReceiveText = 10;
 }
