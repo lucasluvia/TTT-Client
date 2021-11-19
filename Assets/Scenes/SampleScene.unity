@@ -2256,6 +2256,7 @@ MonoBehaviour:
   buttonI: {fileID: 397112729}
   MessageText: {fileID: 147258348}
   TextText: {fileID: 410375469}
+  TextPanel: {fileID: 1290331209}
 --- !u!4 &1851942135
 Transform:
   m_ObjectHideFlags: 0

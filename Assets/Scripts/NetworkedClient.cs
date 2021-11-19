@@ -19,10 +19,12 @@ public class NetworkedClient : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI MessageText;
     [SerializeField] TextMeshProUGUI TextText;
+    [SerializeField] GameObject TextPanel;
 
     bool isMyTurn;
     bool isGameOver = false;
     bool canRestart = false;
+    bool isSpectator = false;
 
     int connectionID;
     int maxConnections = 1000;
@@ -57,7 +59,7 @@ public class NetworkedClient : MonoBehaviour
 
     public void SquareClicked(char SquareID)
     {
-        if(isMyTurn && !isGameOver)
+        if(isMyTurn && !isGameOver && !isSpectator)
         {
             SendMessageToHost(ClientToServerSignifiers.ClickedSquare + "," + SquareID);
             isMyTurn = false;
@@ -225,10 +227,18 @@ public class NetworkedClient : MonoBehaviour
             case ServerToClientSignifiers.WantToRestart:
                 MessageText.text = "Press R if you want to restart.";
                 canRestart = true;
+                if (isSpectator)
+                    canRestart = false;
                 break;
             case ServerToClientSignifiers.ReceiveText:
                 TextText.text = csv[1].ToString();
                 canRestart = true;
+                break;
+            case ServerToClientSignifiers.Spectating:
+                MessageText.text = "Spectating the game...";
+                TextPanel.SetActive(false);
+                isSpectator = true;
+                canRestart = false;
                 break;
 
         }
@@ -298,4 +308,5 @@ static public class ServerToClientSignifiers
     public const int WatchReplay = 8;
     public const int WantToRestart = 9;
     public const int ReceiveText = 10;
+    public const int Spectating = 11;
 }
