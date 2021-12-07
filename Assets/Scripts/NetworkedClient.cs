@@ -7,15 +7,15 @@ using TMPro;
 
 public class NetworkedClient : MonoBehaviour
 {
-    [SerializeField] ButtonBehaviour buttonA;
-    [SerializeField] ButtonBehaviour buttonB;
-    [SerializeField] ButtonBehaviour buttonC;
-    [SerializeField] ButtonBehaviour buttonD;
-    [SerializeField] ButtonBehaviour buttonE;
-    [SerializeField] ButtonBehaviour buttonF;
-    [SerializeField] ButtonBehaviour buttonG;
-    [SerializeField] ButtonBehaviour buttonH;
-    [SerializeField] ButtonBehaviour buttonI;
+    [SerializeField] ButtonBehaviour buttonTL;
+    [SerializeField] ButtonBehaviour buttonTM;
+    [SerializeField] ButtonBehaviour buttonTR;
+    [SerializeField] ButtonBehaviour buttonCL;
+    [SerializeField] ButtonBehaviour buttonCM;
+    [SerializeField] ButtonBehaviour buttonCR;
+    [SerializeField] ButtonBehaviour buttonBL;
+    [SerializeField] ButtonBehaviour buttonBM;
+    [SerializeField] ButtonBehaviour buttonBR;
 
     [SerializeField] TextMeshProUGUI MessageText;
     [SerializeField] TextMeshProUGUI TextText;
@@ -57,7 +57,7 @@ public class NetworkedClient : MonoBehaviour
 
     }
 
-    public void SquareClicked(char SquareID)
+    public void SquareClicked(string SquareID)
     {
         if(isMyTurn && !isGameOver && !isSpectator)
         {
@@ -147,55 +147,18 @@ public class NetworkedClient : MonoBehaviour
         string[] csv = msg.Split(',');
 
         int signifier = int.Parse(csv[0]);
-        char location;
+        string location;
         switch (signifier)
         {
             case ServerToClientSignifiers.XValuePlaced:
-                Debug.Log("XValuePlaced");
-                location = char.Parse(csv[2]);
-                Debug.Log("location = " + location);
-                if (location == 'A')
-                    buttonA.PlaceX();
-                else if (location == 'B')
-                    buttonB.PlaceX();
-                else if (location == 'C')
-                    buttonC.PlaceX();
-                else if (location == 'D')
-                    buttonD.PlaceX();
-                else if (location == 'E')
-                    buttonE.PlaceX();
-                else if (location == 'F')
-                    buttonF.PlaceX();
-                else if (location == 'G')
-                    buttonG.PlaceX();
-                else if (location == 'H')
-                    buttonH.PlaceX();
-                else if (location == 'I')
-                    buttonI.PlaceX();
-                location = 'J';
+                location = (csv[2]);
+                inPositionPlaceX(location);
+                location = "Z";
                 break;
             case ServerToClientSignifiers.OValuePlaced:
-                Debug.Log("OValuePlaced");
-                location = char.Parse(csv[2]);
-                if (location == 'A')
-                    buttonA.PlaceO();
-                else if (location == 'B')
-                    buttonB.PlaceO();
-                else if (location == 'C')
-                    buttonC.PlaceO();
-                else if (location == 'D')
-                    buttonD.PlaceO();
-                else if (location == 'E')
-                    buttonE.PlaceO();
-                else if (location == 'F')
-                    buttonF.PlaceO();
-                else if (location == 'G')
-                    buttonG.PlaceO();
-                else if (location == 'H')
-                    buttonH.PlaceO();
-                else if (location == 'I')
-                    buttonI.PlaceO();
-                location = 'J';
+                location = (csv[2]);
+                inPositionPlaceO(location);
+                location = "Z";
                 break;
             case ServerToClientSignifiers.ItsYourTurn:
                 Debug.Log("ItsYourTurn");
@@ -273,15 +236,60 @@ public class NetworkedClient : MonoBehaviour
     }
     private void WipeButtons()
     {
-        buttonA.WipePlacement();
-        buttonB.WipePlacement();
-        buttonC.WipePlacement();
-        buttonD.WipePlacement();
-        buttonE.WipePlacement();
-        buttonF.WipePlacement();
-        buttonG.WipePlacement();
-        buttonH.WipePlacement();
-        buttonI.WipePlacement();
+        buttonTL.WipePlacement();
+        buttonTM.WipePlacement();
+        buttonTR.WipePlacement();
+        buttonCL.WipePlacement();
+        buttonCM.WipePlacement();
+        buttonCR.WipePlacement();
+        buttonBL.WipePlacement();
+        buttonBM.WipePlacement();
+        buttonBR.WipePlacement();
+    }
+
+
+    private void inPositionPlaceX(string location)
+    {
+        if (location == "TL")
+            buttonTL.PlaceX();
+        else if (location == "TM")
+            buttonTM.PlaceX();
+        else if (location == "TR")
+            buttonTR.PlaceX();
+        else if (location == "CL")
+            buttonCL.PlaceX();
+        else if (location == "CM")
+            buttonCM.PlaceX();
+        else if (location == "CR")
+            buttonCR.PlaceX();
+        else if (location == "BL")
+            buttonBL.PlaceX();
+        else if (location == "BM")
+            buttonBM.PlaceX();
+        else if (location == "BR")
+            buttonBR.PlaceX();
+    }
+
+    private void inPositionPlaceO(string clickedSquare)
+    {
+        if (clickedSquare == "TL")
+            buttonTL.PlaceO();
+        else if (clickedSquare == "TM")
+            buttonTM.PlaceO();
+        else if (clickedSquare == "TR")
+            buttonTR.PlaceO();
+        else if (clickedSquare == "CL")
+            buttonCL.PlaceO();
+        else if (clickedSquare == "CM")
+            buttonCM.PlaceO();
+        else if (clickedSquare == "CR")
+            buttonCR.PlaceO();
+        else if (clickedSquare == "BL")
+            buttonBL.PlaceO();
+        else if (clickedSquare == "BM")
+            buttonBM.PlaceO();
+        else if (clickedSquare == "BR")
+            buttonBR.PlaceO();
     }
 
 

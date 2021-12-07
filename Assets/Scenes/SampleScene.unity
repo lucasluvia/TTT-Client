@@ -346,11 +346,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 73
+      value: BR
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: I
+      value: BR
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -601,11 +601,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 70
+      value: CR
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: F
+      value: CR
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -1293,11 +1293,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 68
+      value: CL
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: D
+      value: CL
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -1403,11 +1403,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 72
+      value: BM
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: H
+      value: BM
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -1574,7 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d1c7462604a1248a7473f4a25114ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonID: 75
+  buttonID: 
   client: {fileID: 1851942134}
   textX: {fileID: 712730529}
   textO: {fileID: 712730529}
@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d1c7462604a1248a7473f4a25114ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonID: 75
+  buttonID: 
   client: {fileID: 1851942134}
   textX: {fileID: 712730529}
   textO: {fileID: 712730529}
@@ -1919,11 +1919,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 66
+      value: TM
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: B
+      value: TM
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -2245,15 +2245,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2185607a11e595a4780ff87d3fb5ef42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonA: {fileID: 697514892}
-  buttonB: {fileID: 1230846191}
-  buttonC: {fileID: 2139830993}
-  buttonD: {fileID: 635458022}
-  buttonE: {fileID: 1885539198}
-  buttonF: {fileID: 688082067}
-  buttonG: {fileID: 1177608161}
-  buttonH: {fileID: 718454900}
-  buttonI: {fileID: 397112729}
+  buttonTL: {fileID: 697514892}
+  buttonTM: {fileID: 1230846191}
+  buttonTR: {fileID: 2139830993}
+  buttonCL: {fileID: 635458022}
+  buttonCM: {fileID: 1885539198}
+  buttonCR: {fileID: 688082067}
+  buttonBL: {fileID: 1177608161}
+  buttonBM: {fileID: 718454900}
+  buttonBR: {fileID: 397112729}
   MessageText: {fileID: 147258348}
   TextText: {fileID: 410375469}
   TextPanel: {fileID: 1290331209}
@@ -2436,7 +2436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d1c7462604a1248a7473f4a25114ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonID: 75
+  buttonID: 
   client: {fileID: 1851942134}
   textX: {fileID: 712730529}
   textO: {fileID: 712730529}
@@ -2588,7 +2588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d1c7462604a1248a7473f4a25114ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonID: 75
+  buttonID: 
   client: {fileID: 1851942134}
   textX: {fileID: 712730529}
   textO: {fileID: 712730529}
@@ -2701,11 +2701,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 69
+      value: CM
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: E
+      value: CM
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -2811,11 +2811,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 71
+      value: BL
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: G
+      value: BL
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -2921,11 +2921,11 @@ PrefabInstance:
       objectReference: {fileID: 1851942134}
     - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: buttonID
-      value: 67
+      value: TR
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: C
+      value: TR
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
@@ -3040,6 +3040,10 @@ PrefabInstance:
       propertyPath: client
       value: 
       objectReference: {fileID: 1851942134}
+    - target: {fileID: 980256091367156776, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
+      propertyPath: buttonID
+      value: TL
+      objectReference: {fileID: 0}
     - target: {fileID: 6782236461678042855, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3050,7 +3054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315749, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Name
-      value: A
+      value: TL
       objectReference: {fileID: 0}
     - target: {fileID: 6782236462464315754, guid: f961ed96b7b637045b23192dcd0b9bd4, type: 3}
       propertyPath: m_Pivot.x
