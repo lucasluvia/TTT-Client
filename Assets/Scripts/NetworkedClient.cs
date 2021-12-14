@@ -17,8 +17,8 @@ public class NetworkedClient : MonoBehaviour
     [SerializeField] ButtonBehaviour buttonBM;
     [SerializeField] ButtonBehaviour buttonBR;
 
-    [SerializeField] TextMeshProUGUI MessageText;
-    [SerializeField] TextMeshProUGUI TextText;
+    [SerializeField] TextMeshProUGUI MessageFromServerText;
+    [SerializeField] TextMeshProUGUI MessageFromPlayerText;
     [SerializeField] GameObject TextPanel;
 
     bool isMyTurn;
@@ -49,7 +49,7 @@ public class NetworkedClient : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) && canRestart)
         {
             SendMessageToHost(ClientToServerSignifiers.Restart + "");
-            MessageText.text = "Waiting for other player...";
+            MessageFromServerText.text = "Waiting for other player...";
         }
 
         UpdateNetworkConnection();
@@ -63,7 +63,7 @@ public class NetworkedClient : MonoBehaviour
         {
             SendMessageToHost(ClientToServerSignifiers.ClickedSquare + "," + SquareID);
             isMyTurn = false;
-            MessageText.text = "Waiting for other player...";
+            MessageFromServerText.text = "Waiting for other player...";
         }
 
     }
@@ -84,7 +84,7 @@ public class NetworkedClient : MonoBehaviour
             {
                 case NetworkEventType.ConnectEvent:
                     Debug.Log("connected.  " + recConnectionID);
-                    MessageText.text = "Waiting for other player...";
+                    MessageFromServerText.text = "Waiting for other player...";
                     ourClientID = recConnectionID;
                     break;
                 case NetworkEventType.DataEvent:
@@ -95,7 +95,7 @@ public class NetworkedClient : MonoBehaviour
                 case NetworkEventType.DisconnectEvent:
                     isConnected = false;
                     Debug.Log("disconnected.  " + recConnectionID);
-                    MessageText.text = "Disconnected from room";
+                    MessageFromServerText.text = "Disconnected from room";
                     break;
             }
         }
@@ -162,43 +162,44 @@ public class NetworkedClient : MonoBehaviour
                 break;
             case ServerToClientSignifiers.ItsYourTurn:
                 Debug.Log("ItsYourTurn");
-                MessageText.text = "It's your turn!";
+                MessageFromServerText.text = "It's your turn!";
                 isMyTurn = true;
                 break;
             case ServerToClientSignifiers.YouWon:
                 Debug.Log("You Won! Press R to Restart");
-                MessageText.text = "You Won! Watching replay...";
+                MessageFromServerText.text = "You Won! Watching replay...";
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.YouLost:
-                MessageText.text = "You Lost! Watching replay...";
+                MessageFromServerText.text = "You Lost! Watching replay...";
                 Debug.Log(csv[1].ToString());
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.Tie:
-                MessageText.text = "Game Tied. Watching replay...";
+                MessageFromServerText.text = "Game Tied. Watching replay...";
                 Debug.Log(csv[1].ToString());
                 isGameOver = true;
                 break;
             case ServerToClientSignifiers.WipeBoard:
-                MessageText.text = "Waiting for other player...";
+                if(!isSpectator)
+                    MessageFromServerText.text = "Waiting for other player...";
                 WipeBoard();
                 break;
             case ServerToClientSignifiers.WatchReplay:
                 WipeButtons();
                 break;
             case ServerToClientSignifiers.WantToRestart:
-                MessageText.text = "Press R if you want to restart.";
+                MessageFromServerText.text = "Press R if you want to restart.";
                 canRestart = true;
                 if (isSpectator)
                     canRestart = false;
                 break;
             case ServerToClientSignifiers.ReceiveText:
-                TextText.text = csv[1].ToString();
+                MessageFromPlayerText.text = csv[1].ToString();
                 canRestart = true;
                 break;
             case ServerToClientSignifiers.Spectating:
-                MessageText.text = "Spectating the game...";
+                MessageFromServerText.text = "Spectating the game...";
                 TextPanel.SetActive(false);
                 isSpectator = true;
                 canRestart = false;
